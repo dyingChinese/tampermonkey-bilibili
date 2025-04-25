@@ -1,6 +1,8 @@
 // 创建下载按钮
 
-type CustomMouseEvent = (ev: MouseEvent) => any
+import GLOBAL_CONFIG from "@/global.config";
+
+type CustomMouseEvent = (this: void, ev?: MouseEvent) => any;
 
 function createDownloadButton(): HTMLDivElement;
 function createDownloadButton(clickEvent?: CustomMouseEvent): HTMLDivElement;
@@ -9,6 +11,8 @@ function createDownloadButton(clickEvent?: CustomMouseEvent): HTMLDivElement;
 function createDownloadButton(clickEvent?: CustomMouseEvent): HTMLDivElement {
     const btn = document.createElement('div');
     btn.className = 'toolbar-item download-btn toolbar-left-item-wrap';
+    btn.id = GLOBAL_CONFIG.BUTTON_ID
+
     btn.innerHTML = `
             <div class="video-toolbar-download video-download-wrap video-toolbar-left-item" title="下载">
                 <svg class="download-icon" width="28" height="28" viewBox="0 0 28 28" fill="currentColor" class="video-download-icon video-toolbar-item-icon">

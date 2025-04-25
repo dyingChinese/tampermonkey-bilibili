@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/streamsaver@2.0.6/StreamSaver.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="huisahdiu">啊四季豆批完</button>
+</body>
+<script>
+    const streamSaver = window.streamSaver
+    // 视频文件的 CDN 加速链接
+    const videoUrl = 'https://cdn.jsdelivr.net/npm/blueimp-md5@2.19.0/js/md5.min.js#md5=71debbb8bf3d230b5083664d0234955c';
+    const fileName = 'blueimp.js';
+    // 创建下载函数
+    async function downloadVideo(url, name) {
+        console.log("创建可写流");
+
+        // 创建可写流
+        const fileStream = streamSaver.createWriteStream(name);
+        const writer = fileStream.getWriter();
+
+        // 发起请求获取视频流
+        const response = await fetch(url);
+        const reader = response.body.getReader();
+        const contentLength = +response.headers.get('Content-Length');
+
+        let receivedLength = 0; // 已接收的字节数
+        console.log("发起请求获取视频流");
+
+        // 逐块写入文件
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+
+            await writer.write(value);
+            receivedLength += value.length;
+
+            // 更新进度条
+            const percentage = (receivedLength / contentLength) * 100;
+            console.log(`下载进度：${percentage.toFixed(2)}%`);
+        }
+        console.log("逐块写入文件");
+
+        // 关闭流
+        await writer.close();
+        console.log('下载完成');
+    }
+
+    document.getElementById("huisahdiu").addEventListener("click", function () {
+        downloadVideo(videoUrl, fileName);
+    })
+</script>
+
+</html>
