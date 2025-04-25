@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name         B站视频下载助手
 // @namespace    Violentmonkey Scripts
-// @version      1.0
+// @version      1.0.1
 // @description  为B站视频添加下载按钮(原生风格)
 // @author       exdragon
 // @match        https://www.bilibili.com/video/BV*
 // @icon         https://www.bilibili.com/favicon.ico
-// @require      https://cdn.jsdelivr.net/npm/streamsaver@2.0.6/StreamSaver.min.js#md5=71debbb8bf3d230b5083664d0234955c
+// @require      https://cdn.jsdelivr.net/npm/streamsaver@2.0.6/StreamSaver.min.js#md5=3f2328335da65654996076bf4f4117c0
 // @require      https://cdn.jsdelivr.net/npm/blueimp-md5@2.19.0/js/md5.min.js#md5=2f577924085ebbe12e29f3ff706397d0
 // @grant        GM_xmlhttpRequest
 // @grant        GM_download
@@ -18,6 +18,7 @@
 // @grant        unsafeWindow
 // @connect      api.snapany.com
 // @connect      bilibili.com
+// @supportURL   https://github.com/dyingChinese/tampermonkey-bilibili/blob/main/dist/dist.js
 // ==/UserScript==
 (function () {
     'use strict';
